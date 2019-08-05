@@ -2,6 +2,11 @@
 title: 微信小程序
 date: 2018-05-04 14:55:34
 tags:
+- 前端
+- 微信小程序
+categories:
+- 前端
+- 微信小程序
 ---
 ## 谈谈我所遇到的小程序的问题
 
@@ -9,59 +14,7 @@ tags:
 
 ### 小程序登录拦截
 
-现在官方的小程序路由拦截还没出现,都是要靠自己写的,我这里是在网上搜了一个比较低配的拦截在filter/filter.js 中定义拦截函数
-
-```
-function loginCheck(pageObj) {
-    if (pageObj.onLoad) {
-       
-        let _onLoad = pageObj.onLoad;
-        // 使用onLoad的话需要传递options
-        pageObj.onLoad = function (options) {
-            if (wx.getStorageSync('userInfo') && wx.getStorageSync('uid') ) {
-             
-                // 获取当前页面
-                let currentInstance = getPageInstance();
-                console.log(currentInstance)
-                _onLoad.call(currentInstance, options);
-
-            } else {
-                let currentInstance = getPageInstance();
-                console.log(currentInstance.route)
-                console.log(currentInstance.options)
-                let nextUrl = {
-                    path: currentInstance.route,
-                    query: currentInstance.options
-                }
-                //跳转到登录页
-                wx.redirectTo({
-                    url: "/pages/login/index"
-                });
-            }
-        }
-    }
-    return pageObj;
-}
-
-// 获取当前页面
-function getPageInstance() {
-    var pages = getCurrentPages();
-    return pages[pages.length - 1];
-}
-
-exports.loginCheck = loginCheck;
-```
-
-这里可以根据自己的需要设置拦截的参数,一般是登录态的token、sessionid、userinfo等.
-用法: 在需要拦截的页面中使用
-
-```
-Page(filter.loginCheck({
-	// 这里是页面代码
-	}))
-```
-
-有些不足,需要在每个页面引入,比较麻烦,有更好的方法,希望大家都分享出来...
+现在官方的小程序路由拦截还没出现,都是要靠自己写的,我是在首页onLoad中判断储存的登录态是否存在，然后checksession，比较麻烦，最近知道一个可以运行在小程序的请求库，fly.js，有兴趣的可以自行学习使用。
 
 ### Ios时间转换问题
 
@@ -150,15 +103,15 @@ var tempdate = new Date(date);
 
      ctx.setFontSize(28)
      ctx.setFillStyle('#6F6F6F')
-     ctx.fillText('妖妖灵', 110, 590)
+     ctx.fillText('text1', 110, 590)
 
      ctx.setFontSize(30)
      ctx.setFillStyle('#111111')
-     ctx.fillText('宠友们快来围观萌宠靓照', 30, 660)
-     ctx.fillText('我在萌爪幼稚园', 30, 700)
+     ctx.fillText('text2', 30, 660)
+     ctx.fillText('text3', 30, 700)
 
      ctx.setFontSize(24)
-     ctx.fillText('长按扫码查看详情', 30, 770)
+     ctx.fillText('text4', 30, 770)
      ctx.draw()
      // 3. canvas画布转成图片
      wx.canvasToTempFilePath({
@@ -187,9 +140,9 @@ var tempdate = new Date(date);
          success(res) {
              wx.showModal({
                  title: '存图成功',
-                 content: '图片成功保存到相册了，去发圈噻~',
+                 content: '图片成功保存',
                  showCancel: false,
-                 confirmText: '好哒',
+                 confirmText: '确定',
                  confirmColor: '#72B9C3',
                  success: function (res) {
                      if (res.confirm) {
