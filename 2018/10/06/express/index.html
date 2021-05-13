@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.7.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="express保留了node.js原生的功能,添加了一些方法,增强原有的功能use监听123456const express = require(&amp;apos;express&amp;apos;);var server = express();server.use(&amp;apos;/&amp;apos;, function (req, res) &amp;#123;  res.send(&amp;#123;a: 1, b: 2&amp;#12">
+<meta name="keywords" content="node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="express">
+<meta property="og:url" content="http://fwenyi.cn/2018/10/06/express/index.html">
+<meta property="og:site_name" content="Fwenyi-Blog">
+<meta property="og:description" content="express保留了node.js原生的功能,添加了一些方法,增强原有的功能use监听123456const express = require(&amp;apos;express&amp;apos;);var server = express();server.use(&amp;apos;/&amp;apos;, function (req, res) &amp;#123;  res.send(&amp;#123;a: 1, b: 2&amp;#12">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-04-22T08:50:15.010Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="express">
+<meta name="twitter:description" content="express保留了node.js原生的功能,添加了一些方法,增强原有的功能use监听123456const express = require(&amp;apos;express&amp;apos;);var server = express();server.use(&amp;apos;/&amp;apos;, function (req, res) &amp;#123;  res.send(&amp;#123;a: 1, b: 2&amp;#12">
+  <link rel="canonical" href="http://fwenyi.cn/2018/10/06/express/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>express | Fwenyi-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Fwenyi-Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">琴瑟在御 莫不静好</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://fwenyi.cn/2018/10/06/express/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Foley Fan">
+      <meta itemprop="description" content="Blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fwenyi-Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">express
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/node-js/" itemprop="url" rel="index"><span itemprop="name">node.js</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="express"><a href="#express" class="headerlink" title="express"></a>express</h1><p>保留了node.js原生的功能,添加了一些方法,增强原有的功能</p><h2 id="use"><a href="#use" class="headerlink" title="use"></a>use</h2><h3 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const express = require(&apos;express&apos;);</span><br><span class="line">var server = express();</span><br><span class="line">server.use(&apos;/&apos;, function (req, res) &#123;</span><br><span class="line">  res.send(&#123;a: 1, b: 2&#125;)</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(8080);</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+<h3 id="处理请求"><a href="#处理请求" class="headerlink" title="处理请求"></a>处理请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server.use(&apos;adress&apos;, callback(req, res) &#123;&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="接受请求的方法"><a href="#接受请求的方法" class="headerlink" title="接受请求的方法"></a>接受请求的方法</h3><ol>
+<li><p>get(‘/‘, callback(req, res)) // 处理get</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server.get(&apos;/&apos;, (req, res) =&gt; &#123;</span><br><span class="line">  req.query // get参数</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>post(‘/‘, callback(req, res)) // 处理post</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">需要body-parser 中间件</span><br><span class="line">server.use(bodyParser.urlencoded(&#123;</span><br><span class="line">  extended: false,  // 扩展模式</span><br><span class="line">  limit: 2*1024*1024 // 限制</span><br><span class="line">&#125;))</span><br><span class="line">server.post(&apos;/&apos;, (req, res) =&gt; &#123;</span><br><span class="line">  req.body // post参数</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>use(‘/‘, callback(req, res)) // 都能处理</p>
+</li>
+</ol>
+<h3 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h3><p>读取静态文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const expressStatic = require(&apos;express-static&apos;);</span><br><span class="line">server.use(expressStatic(&apos;./www&apos;))</span><br></pre></td></tr></table></figure></p>
+<h3 id="链式操作"><a href="#链式操作" class="headerlink" title="链式操作"></a>链式操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 处理同一个接口地址</span><br><span class="line">server.use(&apos;/&apos;, (req, res, next) &#123;</span><br><span class="line">  next(); // 继续下一步</span><br><span class="line">&#125;)</span><br><span class="line">server.use(&apos;/&apos;, (req, res, next) &#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// lib/body.js</span><br><span class="line">module.exports = function (req, res, next) &#123;</span><br><span class="line">  req.body = &#123;&#125;  // 自定义 req属性可以传递</span><br><span class="line">  next() // 执行下一步</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const body = require(&apos;./libs/body&apos;);</span><br><span class="line">server.use(body)</span><br><span class="line"></span><br><span class="line">server.use(&apos;/&apos;, (req, res) &#123;</span><br><span class="line">  console.log(req.body) // &#123;&#125;  通过 body 传递过来</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>客户端保存数据<br>空间非常小<br>安全性非常差<br>校验cookie是否被篡改</p>
+<h4 id="发送"><a href="#发送" class="headerlink" title="发送"></a>发送</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">res.secret = String // 签名秘钥</span><br><span class="line">res.cookie(&apos;key&apos;, value, &#123;</span><br><span class="line">  path: &apos;&apos; // 向上继承</span><br><span class="line">  maxAge: // 毫秒</span><br><span class="line">  signed: Boolean</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const cookieParser = require(&apos;cookie-parser&apos;);</span><br><span class="line">server.use(cookieParser(secret))</span><br><span class="line"></span><br><span class="line">server.use((req, res) =&gt; &#123;</span><br><span class="line">  req.cookies  // 未签名</span><br><span class="line">  req.signedCookies // 签名</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res.clearCookie(key)</span><br></pre></td></tr></table></figure>
+<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><p>保存数据在服务端<br>不能独立存在,基于cookie<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const cookieSession = require(&apos;cookie-session&apos;);</span><br><span class="line">server.use(cookieParser());</span><br><span class="line">server.use(cookieSession(&#123;</span><br><span class="line">  name: &apos;&apos; </span><br><span class="line">  keys: [] // session keys</span><br><span class="line">  maxAge: </span><br><span class="line">&#125;))</span><br><span class="line"></span><br><span class="line">server.use(&apos;/&apos;, (req, res) =&gt; &#123;</span><br><span class="line">  req.session</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">delete req.session</span><br></pre></td></tr></table></figure></p>
+<h2 id="jade"><a href="#jade" class="headerlink" title="jade"></a>jade</h2><p>html模板引擎 改名为(pug)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const jade = require(&apos;jade&apos;);</span><br><span class="line">var str = jade.renderFile(&apos;filename&apos;, &#123;pretty: true&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>   根据缩进划分层级</p>
+<ol>
+<li>属性后面括号里面,多个逗号分隔</li>
+<li>内容空格写</li>
+<li>style JSON写法和普通写法</li>
+<li>class arr写法和普通写法</li>
+<li>简写 div.wrap - div#box -&gt; div class=”wrap” div id=”box”</li>
+<li>复合属性json写法 tag&amp;attributes</li>
+<li>自动识别单双标签</li>
+<li>| 表示原样输出</li>
+<li>tag + ‘.’ 表示所有子代原样输出</li>
+<li>-var 写js 循环,判断<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">html </span><br><span class="line">  head</span><br><span class="line">    style</span><br><span class="line">    script(src=&quot;a.js&quot;)</span><br><span class="line">    script</span><br><span class="line">      include &apos;filename&apos;</span><br><span class="line">    link(href=&quot;a.css&quot;, rel=&quot;relstylesheet&quot;)</span><br><span class="line">  body</span><br><span class="line">    div(style=&quot;width:100px;height: 200px&quot;)</span><br><span class="line">    div(style=&#123;width: &apos;100px&apos;, height: &apos;200px&apos;&#125;)</span><br><span class="line">    div(class=&quot;left right active&quot;)</span><br><span class="line">    div(class=[&apos;left&apos;, &apos;right&apos;, &apos;active&apos;])</span><br><span class="line">      ul(id=&apos;list&apos;)</span><br><span class="line">        li 内容</span><br><span class="line">        li&amp;attributes(&#123;id: &apos;box&apos;, title: &apos;sss&apos;&#125;)</span><br><span class="line">        -var a = 0;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="ejs"><a href="#ejs" class="headerlink" title="ejs"></a>ejs</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const ejs = require(&apos;ejs&apos;);</span><br><span class="line">ejs.renderFile(&apos;, &#123;变量&#125;&apos;, (err, data) =&gt; &#123;&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= a %&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="body-parser"><a href="#body-parser" class="headerlink" title="body-parser"></a>body-parser</h2><p>解析post数据</p>
+<h2 id="multer"><a href="#multer" class="headerlink" title="multer"></a>multer</h2><p>解析文件数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var obj = multer(&#123;dest: &apos;上传路径&apos;&#125;)</span><br><span class="line">server.use(obj.any())</span><br><span class="line">server.use((req, res) =&gt; &#123;</span><br><span class="line">  req.files // arr originalname path</span><br><span class="line">  // rename</span><br><span class="line">  var newName = req.files[0].path + pathLib.parse(req.files[0].originalname).ext;</span><br><span class="line">  fs.rename(req.files[0].path, newName, (err, data) =&gt; &#123;</span><br><span class="line">      if (err) &#123;</span><br><span class="line">          res.send(&apos;上传失败&apos;)</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          res.send(&apos;ok&apos;)</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="consolidate"><a href="#consolidate" class="headerlink" title="consolidate"></a>consolidate</h2><p>适配模板引擎</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">require(&apos;consolidate&apos;); //引入</span><br><span class="line">server.set(&apos;view engine&apos;, &apos;html&apos;) // 输出文件类型</span><br><span class="line">server.set(&apos;views&apos;, &apos;模板文件目录&apos;) // 模板文件位置</span><br><span class="line">server.engine(&apos;html&apos;, consolidate.ejs) // 模板类型</span><br><span class="line"></span><br><span class="line">server.get(&apos;/&apos;, (req, res) =&gt; &#123;</span><br><span class="line">  res.render(&apos;index.ejs&apos;, &#123;name: &apos;1111&apos;&#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="router-子服务"><a href="#router-子服务" class="headerlink" title="router (子服务)"></a>router (子服务)</h2><p>路由 =&gt; 拆分成模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// create</span><br><span class="line">router = express.Router();</span><br><span class="line">// add</span><br><span class="line">server.use(&apos;/user&apos;, router);</span><br><span class="line">// action</span><br><span class="line">router.get() post() use()</span><br></pre></td></tr></table></figure>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><p>免费 性能不错 中小型网站<br>Server端: 存数据<br>Client端: 客户端</p>
+<h4 id="数据库基本概念"><a href="#数据库基本概念" class="headerlink" title="数据库基本概念"></a>数据库基本概念</h4><p>两种单位</p>
+<ol>
+<li>库: 文件夹 - 管理</li>
+<li>表: 文件 - 存数据</li>
+<li>表 -&gt; 行: 一条数据</li>
+<li>表 -&gt; 字段(域): 一个数据项</li>
+</ol>
+<p>主键: 唯一标识符 性能高</p>
+<h4 id="node使用mysql"><a href="#node使用mysql" class="headerlink" title="node使用mysql"></a>node使用mysql</h4><ol>
+<li>连接</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const mysql = require(&apos;mysql&apos;);</span><br><span class="line">mysql.createConnection(host, port, user, password,database);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>查询</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.query(SQL, (err, data) =&gt; &#123;&#125;)</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>SQL (结构化查询语句)<br>关键字大写, 库 表 字段 加上<code></code><br>4大查询语句: 增删改查<br>增: INSERT<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO 表名 (字段列表) VALUES(值列表)</span><br><span class="line">INSERT INTO `user_table` (`ID`, `username`, `password`) VALUES(0, &apos;xiaohong&apos;, &apos;123&apos;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>删: DELETE<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM 表 WHRER 条件</span><br></pre></td></tr></table></figure></p>
+<p>改: UPDATE<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE 表 SET 字段-值, 字段-值... WHERE 条件</span><br></pre></td></tr></table></figure></p>
+<p>查: SELECT</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT what FROM 表</span><br><span class="line">SELECT * FROM `user_table` WHERE 条件;</span><br></pre></td></tr></table></figure>
+<p>子句:<br>WHERE 条件<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WHERE name = &apos;&apos;</span><br><span class="line">WHERE age &gt; 18 AND score &lt; 90</span><br><span class="line">WHERE cash &gt; 100 OR score &gt; 10000</span><br></pre></td></tr></table></figure></p>
+<p>ORDER 排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ORDER BY age ASC/DESC</span><br><span class="line">ASC - 升序 (从小到大)</span><br><span class="line">DESC - 降序 (从大到小)</span><br><span class="line"></span><br><span class="line">ORDER BY price ASC</span><br><span class="line">ORDER BY price ASC, sales DESC</span><br></pre></td></tr></table></figure></p>
+<p>GROUP 聚类 - 合并相同<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GROUP BY</span><br></pre></td></tr></table></figure></p>
+<p>LIMIT - 限制输出 - 分页<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">LIMIT 10; 前10条;</span><br><span class="line">LIMIT 5,8; 从5开始,取8条</span><br><span class="line"></span><br><span class="line">// 分页 每页20条</span><br><span class="line">第一页: 0, 20  0~19</span><br><span class="line">第二页: 20, 20 20~39</span><br><span class="line">第三页: 40, 20</span><br></pre></td></tr></table></figure></p>
+<p>子句之间有顺序关系<br>WHERE GROUP ORDER LIMIT<br>筛选    合并  排序   限制</p>
+<h2 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">crypto node系统模块</span><br><span class="line">var crypto = require(&apos;crypto&apos;);</span><br><span class="line">var obj = crypto.createHash(&apos;md5&apos;);</span><br><span class="line">obj.update(&apos;123456&apos;);</span><br><span class="line">obj.digest(&apos;hex&apos;);</span><br></pre></td></tr></table></figure>
+<h2 id="END"><a href="#END" class="headerlink" title="END"></a>END</h2><p>附上一份我自己搭建的express服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">// server.js</span><br><span class="line">const express = require(&apos;express&apos;);</span><br><span class="line">// 解析数据</span><br><span class="line">// 1. 接口数据</span><br><span class="line">const bodyParser = require(&apos;body-parser&apos;);</span><br><span class="line">// 2. 文件数据</span><br><span class="line">const multer = require(&apos;multer&apos;);</span><br><span class="line">// cookie设置</span><br><span class="line">const cookieParser = require(&apos;cookie-parser&apos;);</span><br><span class="line">const cookieSession = require(&apos;cookie-session&apos;);</span><br><span class="line">// 静态文件设置</span><br><span class="line">const staticLib = require(&apos;express-static&apos;);</span><br><span class="line">// mysql</span><br><span class="line">const mysql = require(&apos;mysql&apos;);</span><br><span class="line">// 模板引擎</span><br><span class="line">const consolidate = require(&apos;consolidate&apos;);</span><br><span class="line">// create listen</span><br><span class="line">var server = express();</span><br><span class="line">server.listen(8080);</span><br><span class="line">// use the middle parser</span><br><span class="line">server.use(bodyParser.urlencoded(&#123;extended: false&#125;));</span><br><span class="line">server.use(multer(&#123;dest: &apos;filepath&apos;&#125;).any());</span><br><span class="line">server.use(cookieParser(&apos;secret&apos;));</span><br><span class="line">(function () &#123;</span><br><span class="line">    var arr = [];</span><br><span class="line">    for(var i =0;i&lt;100000; i++) &#123;</span><br><span class="line">        arr.push(&apos;keys_&apos; + Math.random());</span><br><span class="line">    &#125;</span><br><span class="line">    server.use(cookieSession(&#123;</span><br><span class="line">        name: &apos;session_id&apos;,</span><br><span class="line">        keys: arr, </span><br><span class="line">        maxAge: 2*60*60*1000 // 过期时间</span><br><span class="line">    &#125;))</span><br><span class="line">&#125;)()</span><br><span class="line">server.set(&apos;view engine&apos;, &apos;html&apos;);</span><br><span class="line">server.set(&apos;views&apos;, &apos;temlate path&apos;);</span><br><span class="line">server.engine(&apos;html&apos;, consolidate.ejs);</span><br><span class="line">// use the child router</span><br><span class="line">server.use(&apos;/admin&apos;, require(&apos;./route/admin/index&apos;));</span><br><span class="line">server.use(&apos;/&apos;, require(&apos;./route/web/index&apos;));</span><br><span class="line">// use the static file</span><br><span class="line">server.use(staticLib(&apos;./www/&apos;));</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/node-js/" rel="tag"># node.js</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/08/08/Node-js初体验/" rel="next" title="Node.js初体验">
+                  <i class="fa fa-chevron-left"></i> Node.js初体验
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/03/17/初闻uni-app/" rel="prev" title="初闻uni-app">
+                  初闻uni-app <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#express"><span class="nav-number">1.</span> <span class="nav-text">express</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#use"><span class="nav-number">1.1.</span> <span class="nav-text">use</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#监听"><span class="nav-number">1.1.1.</span> <span class="nav-text">监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理请求"><span class="nav-number">1.1.2.</span> <span class="nav-text">处理请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接受请求的方法"><span class="nav-number">1.1.3.</span> <span class="nav-text">接受请求的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取文件"><span class="nav-number">1.1.4.</span> <span class="nav-text">读取文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链式操作"><span class="nav-number">1.1.5.</span> <span class="nav-text">链式操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中间件"><span class="nav-number">1.1.6.</span> <span class="nav-text">中间件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie"><span class="nav-number">1.1.7.</span> <span class="nav-text">cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#发送"><span class="nav-number">1.1.7.1.</span> <span class="nav-text">发送</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取"><span class="nav-number">1.1.7.2.</span> <span class="nav-text">读取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">1.1.7.3.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session"><span class="nav-number">1.1.8.</span> <span class="nav-text">session</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jade"><span class="nav-number">1.2.</span> <span class="nav-text">jade</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">1.2.1.</span> <span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ejs"><span class="nav-number">1.3.</span> <span class="nav-text">ejs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#body-parser"><span class="nav-number">1.4.</span> <span class="nav-text">body-parser</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multer"><span class="nav-number">1.5.</span> <span class="nav-text">multer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#consolidate"><span class="nav-number">1.6.</span> <span class="nav-text">consolidate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#router-子服务"><span class="nav-number">1.7.</span> <span class="nav-text">router (子服务)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库"><span class="nav-number">1.8.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL"><span class="nav-number">1.8.1.</span> <span class="nav-text">MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库基本概念"><span class="nav-number">1.8.1.1.</span> <span class="nav-text">数据库基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node使用mysql"><span class="nav-number">1.8.1.2.</span> <span class="nav-text">node使用mysql</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MD5"><span class="nav-number">1.9.</span> <span class="nav-text">MD5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#END"><span class="nav-number">1.10.</span> <span class="nav-text">END</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Foley Fan</p>
+  <div class="site-description" itemprop="description">Blog</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备17041982号 </a>
+  <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=" rel="noopener" target="_blank"> </a>&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Foley Fan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.7.1</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.7.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="谈谈我所遇到的小程序的问题主要是记录一下在做的项目中遇到的一些问题和粗浅的解决办法,如果各位大神有更好的方法,希望能不吝赐教。小程序登录拦截现在官方的小程序路由拦截还没出现,都是要靠自己写的,我是在首页onLoad中判断储存的登录态是否存在，然后checksession，比较麻烦，最近知道一个可以运行在小程序的请求库，fly.js，有兴趣的可以自行学习使用。">
+<meta name="keywords" content="前端,微信小程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序">
+<meta property="og:url" content="http://fwenyi.cn/2018/05/04/question/index.html">
+<meta property="og:site_name" content="Fwenyi-Blog">
+<meta property="og:description" content="谈谈我所遇到的小程序的问题主要是记录一下在做的项目中遇到的一些问题和粗浅的解决办法,如果各位大神有更好的方法,希望能不吝赐教。小程序登录拦截现在官方的小程序路由拦截还没出现,都是要靠自己写的,我是在首页onLoad中判断储存的登录态是否存在，然后checksession，比较麻烦，最近知道一个可以运行在小程序的请求库，fly.js，有兴趣的可以自行学习使用。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-04-22T08:50:15.010Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信小程序">
+<meta name="twitter:description" content="谈谈我所遇到的小程序的问题主要是记录一下在做的项目中遇到的一些问题和粗浅的解决办法,如果各位大神有更好的方法,希望能不吝赐教。小程序登录拦截现在官方的小程序路由拦截还没出现,都是要靠自己写的,我是在首页onLoad中判断储存的登录态是否存在，然后checksession，比较麻烦，最近知道一个可以运行在小程序的请求库，fly.js，有兴趣的可以自行学习使用。">
+  <link rel="canonical" href="http://fwenyi.cn/2018/05/04/question/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>微信小程序 | Fwenyi-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Fwenyi-Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">琴瑟在御 莫不静好</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://fwenyi.cn/2018/05/04/question/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Foley Fan">
+      <meta itemprop="description" content="Blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fwenyi-Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">微信小程序
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/微信小程序/" itemprop="url" rel="index"><span itemprop="name">微信小程序</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="谈谈我所遇到的小程序的问题"><a href="#谈谈我所遇到的小程序的问题" class="headerlink" title="谈谈我所遇到的小程序的问题"></a>谈谈我所遇到的小程序的问题</h2><p>主要是记录一下在做的项目中遇到的一些问题和粗浅的解决办法,如果各位大神有更好的方法,希望能不吝赐教。</p><h3 id="小程序登录拦截"><a href="#小程序登录拦截" class="headerlink" title="小程序登录拦截"></a>小程序登录拦截</h3><p>现在官方的小程序路由拦截还没出现,都是要靠自己写的,我是在首页onLoad中判断储存的登录态是否存在，然后checksession，比较麻烦，最近知道一个可以运行在小程序的请求库，fly.js，有兴趣的可以自行学习使用。</p><a id="more"></a>
+
+<h3 id="Ios时间转换问题"><a href="#Ios时间转换问题" class="headerlink" title="Ios时间转换问题"></a>Ios时间转换问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var date = &apos;2018-05-30 16:00:00&apos;;</span><br><span class="line">var tempdate = new Date(date);</span><br></pre></td></tr></table></figure>
+<p>上述代码在模拟器和Android手机上运行没问题,但在ios上就会是NAN,原因是ios不识别’-‘形式的时间格式<br>将其转化成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var date = &apos;2018-05-30 16:00:00&apos;;</span><br><span class="line">data = date.replace(/-/g, &apos;/&apos;);</span><br><span class="line">var tempdate = new Date(date);</span><br></pre></td></tr></table></figure>
+<p>这样就可以计算时间的转换了.</p>
+<h3 id="分享内页时无法跳转到首页"><a href="#分享内页时无法跳转到首页" class="headerlink" title="分享内页时无法跳转到首页"></a>分享内页时无法跳转到首页</h3><ol>
+<li>在内页上添加一个可移动的悬浮块,跳转到想要的页面上(低配);</li>
+<li>分享首页带上具体页面你的参数,在首页onload判断参数,跳转到具体的页面.</li>
+</ol>
+<h3 id="图片自适应"><a href="#图片自适应" class="headerlink" title="图片自适应"></a>图片自适应</h3><p>有些时候,将图片全部设为同样的大小,并不完美,比较小的图片会被放大,模糊,可以设置一个最大宽度限制,小于次宽度的图片<br>就以原图的大小显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- wxml --&gt;</span><br><span class="line"> &lt;image wx:for=&quot;&#123;&#123;photos&#125;&#125;&quot; wx:key=&quot;&#123;&#123;index&#125;&#125;&quot; wx:if=&quot;&#123;&#123;item&#125;&#125;&quot; src=&apos;&#123;&#123;imgHost+item&#125;&#125;&apos; bindload=&apos;imgLoad&apos; data-imgid=&quot;&#123;&#123;index&#125;&#125;&quot; style=&quot;width:&#123;&#123;imgwidth[index]&#125;&#125;rpx; height:&#123;&#123;imgheight[index]&#125;&#125;rpx;&quot;&gt;&lt;/image&gt;</span><br><span class="line"></span><br><span class="line"> &lt;!-- js --&gt;</span><br><span class="line"> Page(&#123;</span><br><span class="line"> 		data: &#123;</span><br><span class="line"> 			photos: [],</span><br><span class="line"> 			imgwidth: [],</span><br><span class="line"> 			imgheight: []</span><br><span class="line"> 		&#125;,</span><br><span class="line"> 		imgLoad: function (e) &#123;</span><br><span class="line">      var imgid = e.currentTarget.dataset.imgid</span><br><span class="line">      var _this = this;</span><br><span class="line">      var $width = e.detail.width,    //获取图片真实宽度  </span><br><span class="line">          $height = e.detail.height,</span><br><span class="line">          ratio = $width / $height;   //图片的真实宽高比例  </span><br><span class="line">            if($width&gt;650) &#123;</span><br><span class="line">                var viewWidth = 650,    </span><br><span class="line">                viewHeight = 650 / ratio; </span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                var viewWidth = $width,</span><br><span class="line">                    viewHeight = $height;</span><br><span class="line">            &#125;</span><br><span class="line">            var itemwidth = &apos;imgwidth[&apos; + imgid + &apos;]&apos;  //设置图片显示宽度，</span><br><span class="line">            var itemhieght = &apos;imgheight[&apos;+imgid+&apos;]&apos;    //计算的高度值  </span><br><span class="line">              </span><br><span class="line">               </span><br><span class="line">      this.setData(&#123;</span><br><span class="line">          [itemwidth]: viewWidth,</span><br><span class="line">          [itemhieght]: viewHeight</span><br><span class="line">      &#125;)  </span><br><span class="line">      console.log(this.data.imgwidth,this.data.imgheight)</span><br><span class="line">  &#125;,</span><br><span class="line"> 	&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="分享到朋友圈"><a href="#分享到朋友圈" class="headerlink" title="分享到朋友圈"></a>分享到朋友圈</h3><p>小程序暂时没有开放直接分享到朋友圈的API,需要用户保存截图再分享<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">const shareApp = () =&gt; &#123;</span><br><span class="line">			//1. 获取当前页面二维码</span><br><span class="line">			</span><br><span class="line">    //2. canvas绘制文字和图片</span><br><span class="line">    const ctx = wx.createCanvasContext(&apos;myCanvas&apos;);</span><br><span class="line">    var imgPath = &apos;/image/icon/doyen.png&apos;</span><br><span class="line">    var bgImgPath = &apos;../../../image/doyen.png&apos;;</span><br><span class="line">    ctx.drawImage(imgPath, 0, 0, 600, 520);</span><br><span class="line"></span><br><span class="line">    ctx.setFillStyle(&apos;white&apos;)</span><br><span class="line">    ctx.fillRect(0, 520, 600, 280);</span><br><span class="line"></span><br><span class="line">    ctx.drawImage(imgPath, 30, 550, 60, 60);</span><br><span class="line">    ctx.drawImage(bgImgPath, 30, 550, 60, 60);</span><br><span class="line">    ctx.drawImage(imgPath, 410, 610, 160, 160);</span><br><span class="line"></span><br><span class="line">    ctx.setFontSize(28)</span><br><span class="line">    ctx.setFillStyle(&apos;#6F6F6F&apos;)</span><br><span class="line">    ctx.fillText(&apos;text1&apos;, 110, 590)</span><br><span class="line"></span><br><span class="line">    ctx.setFontSize(30)</span><br><span class="line">    ctx.setFillStyle(&apos;#111111&apos;)</span><br><span class="line">    ctx.fillText(&apos;text2&apos;, 30, 660)</span><br><span class="line">    ctx.fillText(&apos;text3&apos;, 30, 700)</span><br><span class="line"></span><br><span class="line">    ctx.setFontSize(24)</span><br><span class="line">    ctx.fillText(&apos;text4&apos;, 30, 770)</span><br><span class="line">    ctx.draw()</span><br><span class="line">    // 3. canvas画布转成图片</span><br><span class="line">    wx.canvasToTempFilePath(&#123;</span><br><span class="line">        x: 0,</span><br><span class="line">        y: 0,</span><br><span class="line">        width: 600,</span><br><span class="line">        height: 800,</span><br><span class="line">        destWidth: 600,</span><br><span class="line">        destHeight: 800,</span><br><span class="line">        canvasId: &apos;myCanvas&apos;,</span><br><span class="line">        success: function (res) &#123;</span><br><span class="line">            console.log(res.tempFilePath);</span><br><span class="line">            that.setData(&#123;</span><br><span class="line">                shareImgSrc: res.tempFilePath</span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">        &#125;,</span><br><span class="line">        fail: function (res) &#123;</span><br><span class="line">            console.log(res)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    //4. 当用户点击分享到朋友圈时，将图片保存到相册</span><br><span class="line">    wx.saveImageToPhotosAlbum(&#123;</span><br><span class="line">        filePath: that.data.shareImgSrc,</span><br><span class="line">        success(res) &#123;</span><br><span class="line">            wx.showModal(&#123;</span><br><span class="line">                title: &apos;存图成功&apos;,</span><br><span class="line">                content: &apos;图片成功保存&apos;,</span><br><span class="line">                showCancel: false,</span><br><span class="line">                confirmText: &apos;确定&apos;,</span><br><span class="line">                confirmColor: &apos;#72B9C3&apos;,</span><br><span class="line">                success: function (res) &#123;</span><br><span class="line">                    if (res.confirm) &#123;</span><br><span class="line">                        console.log(&apos;用户点击确定&apos;);</span><br><span class="line">                    &#125;</span><br><span class="line">                    //  that.hideShareImg()</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">        fail: res =&gt; &#123;</span><br><span class="line"></span><br><span class="line">            console.log(res)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>canvas必须显示在页面上才能保存图片成功,但是我们又不想让用户看见这张图,这时候可以用定位,有多远就将canvas定位到多远.</p>
+<h3 id="页面栈"><a href="#页面栈" class="headerlink" title="页面栈"></a>页面栈</h3><p>小程序最多存在五个页面栈,跳转方式可以根据项目需要来定义.</p>
+<h3 id="关于一些组件的使用"><a href="#关于一些组件的使用" class="headerlink" title="关于一些组件的使用"></a>关于一些组件的使用</h3><h4 id="自定义组件"><a href="#自定义组件" class="headerlink" title="自定义组件"></a>自定义组件</h4><p>一些基本的用法可以参照小程序官方文档,</p>
+<h5 id="调用子组件方法"><a href="#调用子组件方法" class="headerlink" title="调用子组件方法"></a>调用子组件方法</h5><p><code>this.selectComponent(&quot;#组件id&quot;).method();</code></p>
+<h4 id="textarea的层级问题"><a href="#textarea的层级问题" class="headerlink" title="textarea的层级问题"></a>textarea的层级问题</h4><p>textarea 组件是由客户端创建的原生组件，它的层级是最高的，不能通过 z-index 控制层级。</p>
+<p>持续更新中……</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/前端/" rel="tag"># 前端</a>
+            
+              <a href="/tags/微信小程序/" rel="tag"># 微信小程序</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/06/11/wx/" rel="prev" title="微信小程序(二)">
+                  微信小程序(二) <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#谈谈我所遇到的小程序的问题"><span class="nav-number">1.</span> <span class="nav-text">谈谈我所遇到的小程序的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小程序登录拦截"><span class="nav-number">1.1.</span> <span class="nav-text">小程序登录拦截</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ios时间转换问题"><span class="nav-number">1.2.</span> <span class="nav-text">Ios时间转换问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分享内页时无法跳转到首页"><span class="nav-number">1.3.</span> <span class="nav-text">分享内页时无法跳转到首页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片自适应"><span class="nav-number">1.4.</span> <span class="nav-text">图片自适应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分享到朋友圈"><span class="nav-number">1.5.</span> <span class="nav-text">分享到朋友圈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面栈"><span class="nav-number">1.6.</span> <span class="nav-text">页面栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于一些组件的使用"><span class="nav-number">1.7.</span> <span class="nav-text">关于一些组件的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义组件"><span class="nav-number">1.7.1.</span> <span class="nav-text">自定义组件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#调用子组件方法"><span class="nav-number">1.7.1.1.</span> <span class="nav-text">调用子组件方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#textarea的层级问题"><span class="nav-number">1.7.2.</span> <span class="nav-text">textarea的层级问题</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Foley Fan</p>
+  <div class="site-description" itemprop="description">Blog</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备17041982号 </a>
+  <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=" rel="noopener" target="_blank"> </a>&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Foley Fan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.7.1</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
