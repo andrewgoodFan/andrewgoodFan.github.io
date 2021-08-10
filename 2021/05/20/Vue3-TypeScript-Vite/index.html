@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.7.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="项目初始化 npm init @vitejs/app 12345&amp;#123;    Project name &apos;vue3_demo&apos;,    framework: &apos;vue&apos;,    variant: &apos;TypeScript&apos;&amp;#125;  cd vue3_demo -&amp;gt; npm i -&amp;gt; npm run dev">
+<meta name="keywords" content="前端,Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue3 - TypeScript - Vite">
+<meta property="og:url" content="http://fwenyi.cn/2021/05/20/Vue3-TypeScript-Vite/index.html">
+<meta property="og:site_name" content="Fwenyi-Blog">
+<meta property="og:description" content="项目初始化 npm init @vitejs/app 12345&amp;#123;    Project name &apos;vue3_demo&apos;,    framework: &apos;vue&apos;,    variant: &apos;TypeScript&apos;&amp;#125;  cd vue3_demo -&amp;gt; npm i -&amp;gt; npm run dev">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-07-27T08:18:07.233Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue3 - TypeScript - Vite">
+<meta name="twitter:description" content="项目初始化 npm init @vitejs/app 12345&amp;#123;    Project name &apos;vue3_demo&apos;,    framework: &apos;vue&apos;,    variant: &apos;TypeScript&apos;&amp;#125;  cd vue3_demo -&amp;gt; npm i -&amp;gt; npm run dev">
+  <link rel="canonical" href="http://fwenyi.cn/2021/05/20/Vue3-TypeScript-Vite/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Vue3 - TypeScript - Vite | Fwenyi-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Fwenyi-Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">琴瑟在御 莫不静好</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://fwenyi.cn/2021/05/20/Vue3-TypeScript-Vite/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Foley Fan">
+      <meta itemprop="description" content="Blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fwenyi-Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Vue3 - TypeScript - Vite
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="项目初始化"><a href="#项目初始化" class="headerlink" title="项目初始化"></a>项目初始化</h2><ol>
+<li><p><code>npm init @vitejs/app</code></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    Project name <span class="string">'vue3_demo'</span>,</span><br><span class="line">    framework: <span class="string">'vue'</span>,</span><br><span class="line">    variant: <span class="string">'TypeScript'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>cd vue3_demo</code> -&gt; <code>npm i</code> -&gt; <code>npm run dev</code></p>
+</li>
+</ol><a id="more"></a>
+<h2 id="vue3知识"><a href="#vue3知识" class="headerlink" title="vue3知识"></a>vue3知识</h2><h3 id="ref和reactive的区别"><a href="#ref和reactive的区别" class="headerlink" title="ref和reactive的区别"></a>ref和reactive的区别</h3><p>ref 的作用就是将一个原始数据类型（primitive data type）转换成一个带有响应式特性的数据类型</p>
+<p>reactive是用来定义更加复杂的数据类型，但是定义后里面的变量取出来就不在是响应式Ref对象数据了,所以需要用toRefs函数转化为响应式数据对象</p>
+<p>reactive 和 ref 都是用来定义响应式数据的 reactive更推荐去定义复杂的数据类型 ref 更推荐定义基本类型</p>
+<h3 id="setup"><a href="#setup" class="headerlink" title="setup"></a>setup</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; toRefs &#125; <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line">setup(props, context) &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * props </span></span><br><span class="line"><span class="comment">     * 响应式的，你不能使用 ES6 解构，因为它会消除 prop 的响应性。</span></span><br><span class="line"><span class="comment">     * 如果需要解构 prop，可以通过使用 setup 函数中的 toRefs</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   props.title ? (<span class="keyword">const</span> &#123; title &#125; = toRefs(props)) : ( <span class="keyword">const</span> title = toRef(props, <span class="string">'title'</span>))</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * context</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">    <span class="keyword">const</span> &#123;attr,slot, emit&#125; = context</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回值</span></span><br><span class="line"><span class="comment">     * obj 可供模板使用的</span></span><br><span class="line"><span class="comment">     * render函数  </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span> obj  || <span class="function"><span class="params">()</span> =&gt;</span> VNode</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="hook"><a href="#hook" class="headerlink" title="hook"></a>hook</h3><p>hook方法需要定义在 setup 顶层</p>
+<h3 id="vue动态组件"><a href="#vue动态组件" class="headerlink" title="vue动态组件"></a>vue动态组件</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;component :is=<span class="string">"currentTabComponent"</span>&gt;&lt;<span class="regexp">/component&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="JSX使用插槽"><a href="#JSX使用插槽" class="headerlink" title="JSX使用插槽"></a>JSX使用插槽</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'sidemenu'</span>, <span class="keyword">this</span>.route)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'sidemenu'</span>, <span class="keyword">this</span>.menu)</span><br><span class="line">    <span class="keyword">const</span> slots = &#123;</span><br><span class="line">        title: <span class="function"><span class="params">()</span> =&gt;</span> &lt;div&gt;</span><br><span class="line">            &#123;<span class="keyword">this</span>.itemMenu?.meta?.icon &amp;&amp; &lt;i <span class="keyword">class</span>=&#123;<span class="keyword">this</span>.itemMenu.meta.icon&#125;&gt;&lt;<span class="regexp">/i&gt; || null&#125;</span></span><br><span class="line"><span class="regexp">            &lt;span&gt;&#123;this.itemMenu.meta?.title || '默认菜单'&#125;&lt;/</span>span&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">    return (</span></span><br><span class="line"><span class="regexp">        &lt;el-submenu v-slots=&#123;slots&#125; index=&#123;this.itemMenu.path&#125;&gt;</span></span><br><span class="line"><span class="regexp">            &#123;</span></span><br><span class="line"><span class="regexp">                this.itemMenu.children?.map((item) =&gt; &#123;</span></span><br><span class="line"><span class="regexp">                    if (item.children &amp;&amp; item.children.length) &#123;</span></span><br><span class="line"><span class="regexp">                        return &lt;SideMenuItem itemMenu=&#123;item&#125; /</span>&gt;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> &lt;el-menu-item index=&#123;item.path&#125;&gt;&#123;item.meta?.title || <span class="string">'默认菜单'</span>&#125;&lt;<span class="regexp">/el-menu-item&gt;</span></span><br><span class="line"><span class="regexp">                    &#125;</span></span><br><span class="line"><span class="regexp">                &#125;)</span></span><br><span class="line"><span class="regexp">            &#125;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>el-submenu&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="Vue3响应式"><a href="#Vue3响应式" class="headerlink" title="Vue3响应式"></a>Vue3响应式</h3><p><code>Proxy</code> - 代理，顾名思义，就是在要访问的对象之前增加一个中间层，这样就不直接访问对象，而是通过中间层做一个中转，通过操作代理对象，来实现修改目标对象<br><code>reactive</code>创建响应式代理对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">createReactiveObject</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">    target: unknown,</span></span></span><br><span class="line"><span class="function"><span class="params">    toProxy: WeakMap&lt;any, any&gt;,</span></span></span><br><span class="line"><span class="function"><span class="params">    toRaw: WeakMap&lt;any, any&gt;,</span></span></span><br><span class="line"><span class="function"><span class="params">    baseHandlers: ProxyHandler&lt;any&gt;,</span></span></span><br><span class="line"><span class="function"><span class="params">    collectionHandlers: ProxyHandler&lt;any&gt;</span></span></span><br><span class="line"><span class="function"><span class="params">    </span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 如果不是对象，直接返回，开发环境下会给警告</span></span><br><span class="line">    <span class="keyword">if</span> (!isObject(target)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (__DEV__) &#123;</span><br><span class="line">        <span class="built_in">console</span>.warn(<span class="string">`value cannot be made reactive: <span class="subst">$&#123;<span class="built_in">String</span>(target)&#125;</span>`</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 目标对象已经是可观察的，直接返回已创建的响应式Proxy，toProxy就是rawToReactive这个WeakMap，用于映射响应式Proxy</span></span><br><span class="line">    <span class="keyword">let</span> observed = toProxy.get(target)</span><br><span class="line">    <span class="keyword">if</span> (observed !== <span class="keyword">void</span> <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> observed</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 目标对象已经是响应式Proxy，直接返回响应式Proxy，toRaw就是reactiveToRaw这个WeakMap，用于映射原始对象</span></span><br><span class="line">    <span class="keyword">if</span> (toRaw.has(target)) &#123;</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 目标对象是不可观察的，直接返回目标对象</span></span><br><span class="line">    <span class="keyword">if</span> (!canObserve(target)) &#123;</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 下面是创建响应式代理的核心逻辑</span></span><br><span class="line">    <span class="comment">// Set、Map、WeakMap、WeakSet的响应式对象handler与Object和Array的响应式对象handler不同</span></span><br><span class="line">    <span class="keyword">const</span> handlers = collectionTypes.has(target.constructor)</span><br><span class="line">        ? collectionHandlers</span><br><span class="line">        : baseHandlers</span><br><span class="line">    <span class="comment">// 创建Proxy</span></span><br><span class="line">    observed = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handlers)</span><br><span class="line">    <span class="comment">// 更新rawToReactive和reactiveToRaw映射</span></span><br><span class="line">    toProxy.set(target, observed)</span><br><span class="line">    toRaw.set(observed, target)</span><br><span class="line">    <span class="comment">// 看reactive的源码，targetMap的用处目前还不清楚，应该是作者预留的尚未完善的feature而准备的</span></span><br><span class="line">    <span class="keyword">if</span> (!targetMap.has(target)) &#123;</span><br><span class="line">        targetMap.set(target, <span class="keyword">new</span> <span class="built_in">Map</span>())</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> observed</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">reactive</span>(<span class="params">target: object</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 如果是readonly对象的代理，那么这个对象是不可观察的，直接返回readonly对象的代理</span></span><br><span class="line">    <span class="keyword">if</span> (readonlyToRaw.has(target)) &#123;</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 如果是readonly原始对象，那么这个对象也是不可观察的，直接返回readonly对象的代理，这里使用readonly调用，可以拿到readonly对象的代理</span></span><br><span class="line">    <span class="keyword">if</span> (readonlyValues.has(target)) &#123;</span><br><span class="line">        <span class="keyword">return</span> readonly(target)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用createReactiveObject创建reactive对象</span></span><br><span class="line">    <span class="keyword">return</span> createReactiveObject(</span><br><span class="line">        target, <span class="comment">// 目标对象</span></span><br><span class="line">        rawToReactive, <span class="comment">// 原始对象映射响应式对象的WeakMap</span></span><br><span class="line">        reactiveToRaw, <span class="comment">// 响应式对象映射原始对象的WeakMap</span></span><br><span class="line">        mutableHandlers, <span class="comment">// 响应式数据的代理handler，一般是Object和Array</span></span><br><span class="line">        mutableCollectionHandlers <span class="comment">// 响应式集合的代理handler，一般是Set、Map、WeakMap、WeakSet</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="vetur-无法识别模块-强迫症解决"><a href="#vetur-无法识别模块-强迫症解决" class="headerlink" title="vetur 无法识别模块 (强迫症解决)"></a>vetur 无法识别模块 (强迫症解决)</h3><ol>
+<li>在vscode中添加插件：<code>Path Intellisense</code></li>
+<li><p>vscode设置 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"path-intellisense.mappings"</span>: &#123;</span><br><span class="line">        <span class="string">"@"</span>: <span class="string">"$&#123;workspaceRoot&#125;/src"</span></span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>项目设置</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tsconfig.ts</span></span><br><span class="line"><span class="string">"paths"</span>: &#123;</span><br><span class="line">    <span class="string">"@/*"</span>: [<span class="string">"./src/*"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="搭建项目框架"><a href="#搭建项目框架" class="headerlink" title="搭建项目框架"></a>搭建项目框架</h3><p><code>vue3 + vite + typescript + elementplus</code></p>
+<ol>
+<li>第一个页面</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// login.vue</span></span><br><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;el-form</span><br><span class="line">        :model=<span class="string">"ruleForm"</span></span><br><span class="line">        status-icon</span><br><span class="line">        :rules=<span class="string">"rules"</span></span><br><span class="line">        ref=<span class="string">"refRuleForm"</span></span><br><span class="line">        label-width=<span class="string">"100px"</span></span><br><span class="line">    &gt;</span><br><span class="line">        &lt;el-form-item label=<span class="string">"账号"</span> prop=<span class="string">"loginAccount"</span>&gt;</span><br><span class="line">            &lt;el-input</span><br><span class="line">                <span class="keyword">type</span>=<span class="string">"text"</span></span><br><span class="line">                v-model=<span class="string">"ruleForm.loginAccount"</span></span><br><span class="line">                autocomplete=<span class="string">"off"</span></span><br><span class="line">            &gt;&lt;<span class="regexp">/el-input&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>el-form-item&gt;</span><br><span class="line">        &lt;el-form-item label=<span class="string">"密码"</span> prop=<span class="string">"loginPassword"</span>&gt;</span><br><span class="line">            &lt;el-input</span><br><span class="line">                <span class="keyword">type</span>=<span class="string">"password"</span></span><br><span class="line">                autocomplete=<span class="string">"off"</span></span><br><span class="line">                v-model=<span class="string">"ruleForm.loginPassword"</span></span><br><span class="line">            &gt;&lt;<span class="regexp">/el-input&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>el-form-item&gt;</span><br><span class="line">        &lt;el-form-item&gt;</span><br><span class="line">            &lt;el-button <span class="keyword">type</span>=<span class="string">"primary"</span></span><br><span class="line">            <span class="meta">@click</span>=<span class="string">"submit(ruleForm)"</span></span><br><span class="line">                &gt;登录&lt;<span class="regexp">/el-button</span></span><br><span class="line"><span class="regexp">            &gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>el-form-item&gt;</span><br><span class="line">    &lt;<span class="regexp">/el-form&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=<span class="string">"ts"</span>&gt;</span><br><span class="line"><span class="keyword">import</span> &#123; defineComponent, onMounted, reactive, toRef, toRefs &#125; <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> &#123;useRouter&#125; <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br><span class="line"><span class="keyword">import</span> &#123;loginService&#125; <span class="keyword">from</span> <span class="string">'../api/login'</span></span><br><span class="line"><span class="keyword">import</span> &#123;enCodeMd5, saveLoginInfo&#125; <span class="keyword">from</span> <span class="string">'@/utils/utils'</span></span><br><span class="line"><span class="keyword">import</span> &#123;CommonTypeProps&#125; <span class="keyword">from</span> <span class="string">'../types/common'</span></span><br><span class="line"><span class="keyword">import</span> &#123; AxiosResponse &#125; <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> RuleFormProps &#123;</span><br><span class="line">    loginAccount: <span class="built_in">string</span></span><br><span class="line">    loginPassword: <span class="built_in">string</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineComponent(&#123;</span><br><span class="line">    setup () &#123;</span><br><span class="line">        <span class="keyword">const</span> router = useRouter()</span><br><span class="line">        <span class="keyword">const</span> rules: <span class="built_in">any</span> = &#123;</span><br><span class="line">            loginAccount: [&#123;</span><br><span class="line">                required: <span class="literal">true</span>,</span><br><span class="line">                message: <span class="string">'请输入手机号'</span></span><br><span class="line">            &#125;],</span><br><span class="line">            loginPassword: [&#123;</span><br><span class="line">                required: <span class="literal">true</span>,</span><br><span class="line">                message: <span class="string">'请输入手机号'</span></span><br><span class="line">            &#125;]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> ruleForm: RuleFormProps = reactive(&#123;</span><br><span class="line">            loginAccount: <span class="string">''</span>,</span><br><span class="line">            loginPassword: <span class="string">''</span></span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">const</span> refRuleForm = toRefs(ruleForm)</span><br><span class="line">        <span class="keyword">const</span> submit = <span class="keyword">async</span> (obj: <span class="built_in">any</span>) =&gt; &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(obj)</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">const</span> res:AxiosResponse&lt;CommonTypeProps.ResponseProps&gt; = <span class="keyword">await</span> loginService(&#123;</span><br><span class="line">                    ...obj,</span><br><span class="line">                    loginPassword: enCodeMd5(obj.loginPassword)</span><br><span class="line">                &#125;)</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'res'</span>, res)</span><br><span class="line">                <span class="keyword">if</span> (res?.data?.bizCode === <span class="string">'SUCCESS'</span>) &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(res.data.respData)</span><br><span class="line">                    saveLoginInfo(res.data.respData)</span><br><span class="line">                    </span><br><span class="line">                    router.push(<span class="string">'/'</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            ...refRuleForm,</span><br><span class="line">            ruleForm,</span><br><span class="line">            rules,</span><br><span class="line">            submit</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>路由配置</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//router/route.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123;RouteRecordRaw&#125; <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> routes: RouteRecordRaw[] = [</span><br><span class="line">    &#123;</span><br><span class="line">        path: <span class="string">'/login'</span>,</span><br><span class="line">        component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/login.vue'</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        path: <span class="string">'/'</span>,</span><br><span class="line">        component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/layout.vue'</span>),</span><br><span class="line">        redirect: <span class="string">'/index'</span>,</span><br><span class="line">        meta: &#123;</span><br><span class="line">            name: <span class="string">'首页'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        children: [</span><br><span class="line">            &#123;</span><br><span class="line">                path: <span class="string">'index'</span>,</span><br><span class="line">                component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/index/index.vue'</span>),</span><br><span class="line">                meta: &#123;</span><br><span class="line">                    name: <span class="string">'首页'</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                path: <span class="string">'order'</span>,</span><br><span class="line">                component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/index/index.vue'</span>),</span><br><span class="line">                meta: &#123;</span><br><span class="line">                    name: <span class="string">'订单'</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                path: <span class="string">'goods'</span>,</span><br><span class="line">                component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/index/index.vue'</span>),</span><br><span class="line">                meta: &#123;</span><br><span class="line">                    name: <span class="string">'商品'</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> routes</span><br><span class="line"><span class="comment">// router/index.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123;createRouter, createWebHashHistory&#125; <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br><span class="line"><span class="keyword">import</span> routes <span class="keyword">from</span> <span class="string">'./route'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = createRouter(&#123;</span><br><span class="line">    history: createWebHashHistory(),</span><br><span class="line">    routes: routes</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>动态路由配置</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Vite 支持使用特殊的 `import.meta.glob` 函数从文件系统导入多个模块</span></span><br><span class="line"><span class="keyword">const</span> modules = <span class="keyword">import</span>.meta.glob(<span class="string">'../views/**/**.vue'</span>)</span><br><span class="line">获取页面文件信息与后台返回的菜单数组匹配，获取路由数组，使用 <span class="string">`addRoute`</span> 方法动态导入到路由中</span><br><span class="line">getMenuDataService().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (res.data.bizCode === <span class="string">'SUCCESS'</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> treeData = listToTree(res.data.result)</span><br><span class="line">        <span class="keyword">const</span> routerList = addRouteRedirect(treeData)</span><br><span class="line">        <span class="keyword">const</span> layout = routes.find(<span class="function">(<span class="params">item</span>) =&gt;</span> item.name === <span class="string">'layout'</span>)!</span><br><span class="line">        layout.children = [...layout.children!, ...routerList]</span><br><span class="line">        router.addRoute(layout)</span><br><span class="line">        router.addRoute(&#123;</span><br><span class="line">            path: <span class="string">'/404'</span>,</span><br><span class="line">            component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/404.vue'</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">        resolve(layout.children)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    reject(err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/前端/" rel="tag"># 前端</a>
+            
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2021/05/19/发布一个插件到npm/" rel="next" title="发布一个插件到npm">
+                  <i class="fa fa-chevron-left"></i> 发布一个插件到npm
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2021/06/15/vue-preload/" rel="prev" title="vue-preload">
+                  vue-preload <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#项目初始化"><span class="nav-number">1.</span> <span class="nav-text">项目初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue3知识"><span class="nav-number">2.</span> <span class="nav-text">vue3知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ref和reactive的区别"><span class="nav-number">2.1.</span> <span class="nav-text">ref和reactive的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setup"><span class="nav-number">2.2.</span> <span class="nav-text">setup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hook"><span class="nav-number">2.3.</span> <span class="nav-text">hook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vue动态组件"><span class="nav-number">2.4.</span> <span class="nav-text">vue动态组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSX使用插槽"><span class="nav-number">2.5.</span> <span class="nav-text">JSX使用插槽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue3响应式"><span class="nav-number">2.6.</span> <span class="nav-text">Vue3响应式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vetur-无法识别模块-强迫症解决"><span class="nav-number">2.7.</span> <span class="nav-text">vetur 无法识别模块 (强迫症解决)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建项目框架"><span class="nav-number">2.8.</span> <span class="nav-text">搭建项目框架</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Foley Fan</p>
+  <div class="site-description" itemprop="description">Blog</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备17041982号 </a>
+  <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=" rel="noopener" target="_blank"> </a>&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Foley Fan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.7.1</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
