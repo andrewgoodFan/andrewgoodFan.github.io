@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fwenyi.cn","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="项目初始化 npm init @vitejs&#x2F;app 12345&#123;    Project name &#x27;vue3_demo&#x27;,    framework: &#x27;vue&#x27;,    variant: &#x27;TypeScript&#x27;&#125;  cd vue3_demo -&gt; npm i -&gt; npm run dev   vue3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue3 - TypeScript - Vite">
+<meta property="og:url" content="http://fwenyi.cn/2021/05/20/Vue3-TypeScript-Vite/index.html">
+<meta property="og:site_name" content="Fwenyi-Blog">
+<meta property="og:description" content="项目初始化 npm init @vitejs&#x2F;app 12345&#123;    Project name &#x27;vue3_demo&#x27;,    framework: &#x27;vue&#x27;,    variant: &#x27;TypeScript&#x27;&#125;  cd vue3_demo -&gt; npm i -&gt; npm run dev   vue3">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-20T08:05:58.000Z">
+<meta property="article:modified_time" content="2024-03-29T09:03:08.137Z">
+<meta property="article:author" content="Len Van">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://fwenyi.cn/2021/05/20/Vue3-TypeScript-Vite/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://fwenyi.cn/2021/05/20/Vue3-TypeScript-Vite/","path":"2021/05/20/Vue3-TypeScript-Vite/","title":"Vue3 - TypeScript - Vite"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Vue3 - TypeScript - Vite | Fwenyi-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Fwenyi-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">琴瑟在御 莫不静好</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">项目初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue3%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">vue3知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ref%E5%92%8Creactive%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">ref和reactive的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setup"><span class="nav-number">2.2.</span> <span class="nav-text">setup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hook"><span class="nav-number">2.3.</span> <span class="nav-text">hook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vue%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6"><span class="nav-number">2.4.</span> <span class="nav-text">vue动态组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSX%E4%BD%BF%E7%94%A8%E6%8F%92%E6%A7%BD"><span class="nav-number">2.5.</span> <span class="nav-text">JSX使用插槽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue3%E5%93%8D%E5%BA%94%E5%BC%8F"><span class="nav-number">2.6.</span> <span class="nav-text">Vue3响应式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vetur-%E6%97%A0%E6%B3%95%E8%AF%86%E5%88%AB%E6%A8%A1%E5%9D%97-%E5%BC%BA%E8%BF%AB%E7%97%87%E8%A7%A3%E5%86%B3"><span class="nav-number">2.7.</span> <span class="nav-text">vetur 无法识别模块 (强迫症解决)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%A1%86%E6%9E%B6"><span class="nav-number">2.8.</span> <span class="nav-text">搭建项目框架</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Len Van</p>
+  <div class="site-description" itemprop="description">Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://fwenyi.cn/2021/05/20/Vue3-TypeScript-Vite/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Len Van">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fwenyi-Blog">
+      <meta itemprop="description" content="Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Vue3 - TypeScript - Vite | Fwenyi-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue3 - TypeScript - Vite
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-20 16:05:58" itemprop="dateCreated datePublished" datetime="2021-05-20T16:05:58+08:00">2021-05-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-29 17:03:08" itemprop="dateModified" datetime="2024-03-29T17:03:08+08:00">2024-03-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="项目初始化"><a href="#项目初始化" class="headerlink" title="项目初始化"></a>项目初始化</h2><ol>
+<li><p><code>npm init @vitejs/app</code></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="title class_">Project</span> name <span class="string">&#x27;vue3_demo&#x27;</span>,</span><br><span class="line">    <span class="attr">framework</span>: <span class="string">&#x27;vue&#x27;</span>,</span><br><span class="line">    <span class="attr">variant</span>: <span class="string">&#x27;TypeScript&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>cd vue3_demo</code> -&gt; <code>npm i</code> -&gt; <code>npm run dev</code></p>
+</li>
+</ol>
+<h2 id="vue3知识"><a href="#vue3知识" class="headerlink" title="vue3知识"></a>vue3知识</h2><h3 id="ref和reactive的区别"><a href="#ref和reactive的区别" class="headerlink" title="ref和reactive的区别"></a>ref和reactive的区别</h3><p>ref 的作用就是将一个原始数据类型（primitive data type）转换成一个带有响应式特性的数据类型</p>
+<p>reactive是用来定义更加复杂的数据类型，但是定义后里面的变量取出来就不在是响应式Ref对象数据了,所以需要用toRefs函数转化为响应式数据对象</p>
+<p>reactive 和 ref 都是用来定义响应式数据的 reactive更推荐去定义复杂的数据类型 ref 更推荐定义基本类型</p>
+<h3 id="setup"><a href="#setup" class="headerlink" title="setup"></a>setup</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; toRefs &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="title function_">setup</span>(<span class="params">props, context</span>) &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * props </span></span><br><span class="line"><span class="comment">     * 响应式的，你不能使用 ES6 解构，因为它会消除 prop 的响应性。</span></span><br><span class="line"><span class="comment">     * 如果需要解构 prop，可以通过使用 setup 函数中的 toRefs</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   props.<span class="property">title</span> ? (<span class="keyword">const</span> &#123; title &#125; = <span class="title function_">toRefs</span>(props)) : ( <span class="keyword">const</span> title = <span class="title function_">toRef</span>(props, <span class="string">&#x27;title&#x27;</span>))</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * context</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">    <span class="keyword">const</span> &#123;attr,slot, emit&#125; = context</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回值</span></span><br><span class="line"><span class="comment">     * obj 可供模板使用的</span></span><br><span class="line"><span class="comment">     * render函数  </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span> obj  || <span class="function">() =&gt;</span> <span class="title class_">VNode</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="hook"><a href="#hook" class="headerlink" title="hook"></a>hook</h3><p>hook方法需要定义在 setup 顶层</p>
+<h3 id="vue动态组件"><a href="#vue动态组件" class="headerlink" title="vue动态组件"></a>vue动态组件</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;component :is=<span class="string">&quot;currentTabComponent&quot;</span>&gt;&lt;/component&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JSX使用插槽"><a href="#JSX使用插槽" class="headerlink" title="JSX使用插槽"></a>JSX使用插槽</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;sidemenu&#x27;</span>, <span class="variable language_">this</span>.<span class="property">route</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;sidemenu&#x27;</span>, <span class="variable language_">this</span>.<span class="property">menu</span>)</span><br><span class="line">    <span class="keyword">const</span> slots = &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="function">() =&gt;</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;this.itemMenu?.meta?.icon &amp;&amp; <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&#123;this.itemMenu.meta.icon&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span> || null&#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;this.itemMenu.meta?.title || &#x27;默认菜单&#x27;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">el-submenu</span> <span class="attr">v-slots</span>=<span class="string">&#123;slots&#125;</span> <span class="attr">index</span>=<span class="string">&#123;this.itemMenu.path&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;</span></span><br><span class="line"><span class="language-xml">                this.itemMenu.children?.map((item) =&gt; &#123;</span></span><br><span class="line"><span class="language-xml">                    if (item.children &amp;&amp; item.children.length) &#123;</span></span><br><span class="line"><span class="language-xml">                        return <span class="tag">&lt;<span class="name">SideMenuItem</span> <span class="attr">itemMenu</span>=<span class="string">&#123;item&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                    &#125; else &#123;</span></span><br><span class="line"><span class="language-xml">                        return <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&#123;item.path&#125;</span>&gt;</span>&#123;item.meta?.title || &#x27;默认菜单&#x27;&#125;<span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    &#125;</span></span><br><span class="line"><span class="language-xml">                &#125;)</span></span><br><span class="line"><span class="language-xml">            &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-submenu</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="Vue3响应式"><a href="#Vue3响应式" class="headerlink" title="Vue3响应式"></a>Vue3响应式</h3><p><code>Proxy</code> - 代理，顾名思义，就是在要访问的对象之前增加一个中间层，这样就不直接访问对象，而是通过中间层做一个中转，通过操作代理对象，来实现修改目标对象<br><code>reactive</code>创建响应式代理对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="title function_">createReactiveObject</span>(<span class="params"></span></span><br><span class="line"><span class="params">    target: unknown,</span></span><br><span class="line"><span class="params">    toProxy: <span class="built_in">WeakMap</span>&lt;any, any&gt;,</span></span><br><span class="line"><span class="params">    toRaw: <span class="built_in">WeakMap</span>&lt;any, any&gt;,</span></span><br><span class="line"><span class="params">    baseHandlers: ProxyHandler&lt;any&gt;,</span></span><br><span class="line"><span class="params">    collectionHandlers: ProxyHandler&lt;any&gt;</span></span><br><span class="line"><span class="params">    </span>) &#123;</span><br><span class="line">    <span class="comment">// 如果不是对象，直接返回，开发环境下会给警告</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_">isObject</span>(target)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (__DEV__) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">`value cannot be made reactive: <span class="subst">$&#123;<span class="built_in">String</span>(target)&#125;</span>`</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 目标对象已经是可观察的，直接返回已创建的响应式Proxy，toProxy就是rawToReactive这个WeakMap，用于映射响应式Proxy</span></span><br><span class="line">    <span class="keyword">let</span> observed = toProxy.<span class="title function_">get</span>(target)</span><br><span class="line">    <span class="keyword">if</span> (observed !== <span class="keyword">void</span> <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> observed</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 目标对象已经是响应式Proxy，直接返回响应式Proxy，toRaw就是reactiveToRaw这个WeakMap，用于映射原始对象</span></span><br><span class="line">    <span class="keyword">if</span> (toRaw.<span class="title function_">has</span>(target)) &#123;</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 目标对象是不可观察的，直接返回目标对象</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_">canObserve</span>(target)) &#123;</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 下面是创建响应式代理的核心逻辑</span></span><br><span class="line">    <span class="comment">// Set、Map、WeakMap、WeakSet的响应式对象handler与Object和Array的响应式对象handler不同</span></span><br><span class="line">    <span class="keyword">const</span> handlers = collectionTypes.<span class="title function_">has</span>(target.<span class="property">constructor</span>)</span><br><span class="line">        ? collectionHandlers</span><br><span class="line">        : baseHandlers</span><br><span class="line">    <span class="comment">// 创建Proxy</span></span><br><span class="line">    observed = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, handlers)</span><br><span class="line">    <span class="comment">// 更新rawToReactive和reactiveToRaw映射</span></span><br><span class="line">    toProxy.<span class="title function_">set</span>(target, observed)</span><br><span class="line">    toRaw.<span class="title function_">set</span>(observed, target)</span><br><span class="line">    <span class="comment">// 看reactive的源码，targetMap的用处目前还不清楚，应该是作者预留的尚未完善的feature而准备的</span></span><br><span class="line">    <span class="keyword">if</span> (!targetMap.<span class="title function_">has</span>(target)) &#123;</span><br><span class="line">        targetMap.<span class="title function_">set</span>(target, <span class="keyword">new</span> <span class="title class_">Map</span>())</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> observed</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">reactive</span>(<span class="params">target: object</span>) &#123;</span><br><span class="line">    <span class="comment">// 如果是readonly对象的代理，那么这个对象是不可观察的，直接返回readonly对象的代理</span></span><br><span class="line">    <span class="keyword">if</span> (readonlyToRaw.<span class="title function_">has</span>(target)) &#123;</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 如果是readonly原始对象，那么这个对象也是不可观察的，直接返回readonly对象的代理，这里使用readonly调用，可以拿到readonly对象的代理</span></span><br><span class="line">    <span class="keyword">if</span> (readonlyValues.<span class="title function_">has</span>(target)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">readonly</span>(target)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用createReactiveObject创建reactive对象</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">createReactiveObject</span>(</span><br><span class="line">        target, <span class="comment">// 目标对象</span></span><br><span class="line">        rawToReactive, <span class="comment">// 原始对象映射响应式对象的WeakMap</span></span><br><span class="line">        reactiveToRaw, <span class="comment">// 响应式对象映射原始对象的WeakMap</span></span><br><span class="line">        mutableHandlers, <span class="comment">// 响应式数据的代理handler，一般是Object和Array</span></span><br><span class="line">        mutableCollectionHandlers <span class="comment">// 响应式集合的代理handler，一般是Set、Map、WeakMap、WeakSet</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="vetur-无法识别模块-强迫症解决"><a href="#vetur-无法识别模块-强迫症解决" class="headerlink" title="vetur 无法识别模块 (强迫症解决)"></a>vetur 无法识别模块 (强迫症解决)</h3><ol>
+<li>在vscode中添加插件：<code>Path Intellisense</code></li>
+<li>vscode设置 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;path-intellisense.mappings&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;@&quot;</span>: <span class="string">&quot;$&#123;workspaceRoot&#125;/src&quot;</span></span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure></li>
+<li>项目设置</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tsconfig.ts</span></span><br><span class="line"><span class="string">&quot;paths&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;@/*&quot;</span>: [<span class="string">&quot;./src/*&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="搭建项目框架"><a href="#搭建项目框架" class="headerlink" title="搭建项目框架"></a>搭建项目框架</h3><p><code>vue3 + vite + typescript + elementplus</code></p>
+<ol>
+<li>第一个页面</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// login.vue</span></span><br><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">el-form</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">:model</span>=<span class="string">&quot;ruleForm&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">status-icon</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">:rules</span>=<span class="string">&quot;rules&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">ref</span>=<span class="string">&quot;refRuleForm&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">label-width</span>=<span class="string">&quot;100px&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    &gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">&quot;账号&quot;</span> <span class="attr">prop</span>=<span class="string">&quot;loginAccount&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">el-input</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">v-model</span>=<span class="string">&quot;ruleForm.loginAccount&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">autocomplete</span>=<span class="string">&quot;off&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            &gt;</span><span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">&quot;密码&quot;</span> <span class="attr">prop</span>=<span class="string">&quot;loginPassword&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">el-input</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">type</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">autocomplete</span>=<span class="string">&quot;off&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">v-model</span>=<span class="string">&quot;ruleForm.loginPassword&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            &gt;</span><span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            @<span class="attr">click</span>=<span class="string">&quot;submit(ruleForm)&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                &gt;</span>登录&lt;/el-button</span></span><br><span class="line"><span class="language-xml">            &gt;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">el-form</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">lang</span>=<span class="string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> &#123; defineComponent, onMounted, reactive, toRef, toRefs &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> &#123;useRouter&#125; <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> &#123;loginService&#125; <span class="keyword">from</span> <span class="string">&#x27;../api/login&#x27;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> &#123;enCodeMd5, saveLoginInfo&#125; <span class="keyword">from</span> <span class="string">&#x27;@/utils/utils&#x27;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> &#123;<span class="title class_">CommonTypeProps</span>&#125; <span class="keyword">from</span> <span class="string">&#x27;../types/common&#x27;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> &#123; <span class="title class_">AxiosResponse</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">interface <span class="title class_">RuleFormProps</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">loginAccount</span>: string</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">loginPassword</span>: string</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineComponent</span>(&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    setup () &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> router = <span class="title function_">useRouter</span>()</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> <span class="attr">rules</span>: any = &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="attr">loginAccount</span>: [&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                <span class="attr">required</span>: <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                <span class="attr">message</span>: <span class="string">&#x27;请输入手机号&#x27;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            &#125;],</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="attr">loginPassword</span>: [&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                <span class="attr">required</span>: <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                <span class="attr">message</span>: <span class="string">&#x27;请输入手机号&#x27;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            &#125;]</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> <span class="attr">ruleForm</span>: <span class="title class_">RuleFormProps</span> = <span class="title function_">reactive</span>(&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="attr">loginAccount</span>: <span class="string">&#x27;&#x27;</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="attr">loginPassword</span>: <span class="string">&#x27;&#x27;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> refRuleForm = <span class="title function_">toRefs</span>(ruleForm)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> <span class="title function_">submit</span> = <span class="keyword">async</span> (<span class="params">obj: any</span>) =&gt; &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="variable language_">console</span>.<span class="title function_">log</span>(obj)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="keyword">try</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                <span class="keyword">const</span> <span class="attr">res</span>:<span class="title class_">AxiosResponse</span>&lt;<span class="title class_">CommonTypeProps</span>.<span class="property">ResponseProps</span>&gt; = <span class="keyword">await</span> <span class="title function_">loginService</span>(&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                    ...obj,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                    <span class="attr">loginPassword</span>: <span class="title function_">enCodeMd5</span>(obj.<span class="property">loginPassword</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                &#125;)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;res&#x27;</span>, res)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                <span class="keyword">if</span> (res?.<span class="property">data</span>?.<span class="property">bizCode</span> === <span class="string">&#x27;SUCCESS&#x27;</span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">data</span>.<span class="property">respData</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                    <span class="title function_">saveLoginInfo</span>(res.<span class="property">data</span>.<span class="property">respData</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                    </span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                    router.<span class="title function_">push</span>(<span class="string">&#x27;/&#x27;</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            &#125; <span class="keyword">catch</span> (error) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                </span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            ...refRuleForm,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            ruleForm,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            rules,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            submit</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>路由配置</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//router/route.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123;<span class="title class_">RouteRecordRaw</span>&#125; <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">routes</span>: <span class="title class_">RouteRecordRaw</span>[] = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;/login&#x27;</span>,</span><br><span class="line">        <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/login.vue&#x27;</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">        <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/layout.vue&#x27;</span>),</span><br><span class="line">        <span class="attr">redirect</span>: <span class="string">&#x27;/index&#x27;</span>,</span><br><span class="line">        <span class="attr">meta</span>: &#123;</span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;首页&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">children</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">path</span>: <span class="string">&#x27;index&#x27;</span>,</span><br><span class="line">                <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/index/index.vue&#x27;</span>),</span><br><span class="line">                <span class="attr">meta</span>: &#123;</span><br><span class="line">                    <span class="attr">name</span>: <span class="string">&#x27;首页&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">path</span>: <span class="string">&#x27;order&#x27;</span>,</span><br><span class="line">                <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/index/index.vue&#x27;</span>),</span><br><span class="line">                <span class="attr">meta</span>: &#123;</span><br><span class="line">                    <span class="attr">name</span>: <span class="string">&#x27;订单&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">path</span>: <span class="string">&#x27;goods&#x27;</span>,</span><br><span class="line">                <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/index/index.vue&#x27;</span>),</span><br><span class="line">                <span class="attr">meta</span>: &#123;</span><br><span class="line">                    <span class="attr">name</span>: <span class="string">&#x27;商品&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> routes</span><br><span class="line"><span class="comment">// router/index.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123;createRouter, createWebHashHistory&#125; <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> routes <span class="keyword">from</span> <span class="string">&#x27;./route&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="title function_">createRouter</span>(&#123;</span><br><span class="line">    <span class="attr">history</span>: <span class="title function_">createWebHashHistory</span>(),</span><br><span class="line">    <span class="attr">routes</span>: routes</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>动态路由配置</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Vite 支持使用特殊的 `import.meta.glob` 函数从文件系统导入多个模块</span></span><br><span class="line"><span class="keyword">const</span> modules = <span class="keyword">import</span>.<span class="property">meta</span>.<span class="title function_">glob</span>(<span class="string">&#x27;../views/**/**.vue&#x27;</span>)</span><br><span class="line">获取页面文件信息与后台返回的菜单数组匹配，获取路由数组，使用 <span class="string">`addRoute`</span> 方法动态导入到路由中</span><br><span class="line"><span class="title function_">getMenuDataService</span>().<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (res.<span class="property">data</span>.<span class="property">bizCode</span> === <span class="string">&#x27;SUCCESS&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> treeData = <span class="title function_">listToTree</span>(res.<span class="property">data</span>.<span class="property">result</span>)</span><br><span class="line">        <span class="keyword">const</span> routerList = <span class="title function_">addRouteRedirect</span>(treeData)</span><br><span class="line">        <span class="keyword">const</span> layout = routes.<span class="title function_">find</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> item.<span class="property">name</span> === <span class="string">&#x27;layout&#x27;</span>)!</span><br><span class="line">        layout.<span class="property">children</span> = [...layout.<span class="property">children</span>!, ...routerList]</span><br><span class="line">        router.<span class="title function_">addRoute</span>(layout)</span><br><span class="line">        router.<span class="title function_">addRoute</span>(&#123;</span><br><span class="line">            <span class="attr">path</span>: <span class="string">&#x27;/404&#x27;</span>,</span><br><span class="line">            <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/404.vue&#x27;</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="title function_">resolve</span>(layout.<span class="property">children</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">reject</span>(err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/05/19/%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AA%E6%8F%92%E4%BB%B6%E5%88%B0npm/" rel="prev" title="发布一个插件到npm">
+                  <i class="fa fa-angle-left"></i> 发布一个插件到npm
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/06/15/vue-preload/" rel="next" title="vue-preload">
+                  vue-preload <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备17041982号-1 </a>
+  </div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Len Van</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

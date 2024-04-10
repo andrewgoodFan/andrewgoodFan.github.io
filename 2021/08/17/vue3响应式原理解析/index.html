@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fwenyi.cn","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Vue3响应式方案Vue3中使用了ES6提供的Proxy来实现对数据的侦测.  可以监听属性的增删操作。 可以监听数组某个索引值的变化以及数组长度的变化  ProxyProxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3响应式原理解析">
+<meta property="og:url" content="http://fwenyi.cn/2021/08/17/vue3%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="Fwenyi-Blog">
+<meta property="og:description" content="Vue3响应式方案Vue3中使用了ES6提供的Proxy来实现对数据的侦测.  可以监听属性的增删操作。 可以监听数组某个索引值的变化以及数组长度的变化  ProxyProxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-17T03:24:04.000Z">
+<meta property="article:modified_time" content="2021-08-18T09:10:32.560Z">
+<meta property="article:author" content="Len Van">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://fwenyi.cn/2021/08/17/vue3%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://fwenyi.cn/2021/08/17/vue3%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/","path":"2021/08/17/vue3响应式原理解析/","title":"vue3响应式原理解析"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>vue3响应式原理解析 | Fwenyi-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Fwenyi-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">琴瑟在御 莫不静好</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue3%E5%93%8D%E5%BA%94%E5%BC%8F%E6%96%B9%E6%A1%88"><span class="nav-number">1.</span> <span class="nav-text">Vue3响应式方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Proxy"><span class="nav-number">1.1.</span> <span class="nav-text">Proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reflect"><span class="nav-number">1.2.</span> <span class="nav-text">Reflect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-and-WeakSet"><span class="nav-number">1.3.</span> <span class="nav-text">Set and WeakSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map-and-WeakMap"><span class="nav-number">1.4.</span> <span class="nav-text">Map and WeakMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue3%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86"><span class="nav-number">1.5.</span> <span class="nav-text">Vue3响应式原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Vue3%E5%93%8D%E5%BA%94%E5%BC%8F%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.5.1.</span> <span class="nav-text">Vue3响应式实现</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Len Van</p>
+  <div class="site-description" itemprop="description">Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://fwenyi.cn/2021/08/17/vue3%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Len Van">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fwenyi-Blog">
+      <meta itemprop="description" content="Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="vue3响应式原理解析 | Fwenyi-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue3响应式原理解析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-17 11:24:04" itemprop="dateCreated datePublished" datetime="2021-08-17T11:24:04+08:00">2021-08-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-18 17:10:32" itemprop="dateModified" datetime="2021-08-18T17:10:32+08:00">2021-08-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Vue3响应式方案"><a href="#Vue3响应式方案" class="headerlink" title="Vue3响应式方案"></a>Vue3响应式方案</h2><p>Vue3中使用了ES6提供的<code>Proxy</code>来实现对数据的侦测.</p>
+<ul>
+<li>可以监听属性的增删操作。</li>
+<li>可以监听数组某个索引值的变化以及数组长度的变化</li>
+</ul>
+<h3 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h3><p><code>Proxy</code> 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。<code>Proxy</code> 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器”。</p>
+<p>具体知识可参考阮一峰老师的<a target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/#docs/proxy">《ES6 入门教程》</a></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(<span class="attr">target</span>: <span class="built_in">object</span>, <span class="attr">handler</span>: <span class="built_in">object</span>)</span><br><span class="line"><span class="keyword">const</span> testProxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(&#123;&#125;, &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params">target: <span class="built_in">object</span>, key: <span class="built_in">string</span>, receiver: <span class="built_in">Proxy</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">set</span>(<span class="params">target: <span class="built_in">object</span>, key: <span class="built_in">string</span>, value: <span class="built_in">any</span>, receiver: <span class="built_in">Proxy</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">set</span>(<span class="attr">target</span>: <span class="built_in">object</span>, <span class="attr">key</span>: <span class="built_in">string</span>, <span class="attr">value</span>: <span class="built_in">any</span>, <span class="attr">receiver</span>: <span class="title class_">Proxy</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">testProxy.<span class="property">a</span> = <span class="number">1</span> <span class="comment">// </span></span><br><span class="line">testProxy.<span class="property">a</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Reflect"><a href="#Reflect" class="headerlink" title="Reflect"></a>Reflect</h3><p><code>Reflect</code>对象与<code>Proxy</code>对象一样，也是 ES6 为了操作对象而提供的新 API<br>可以用来改写对象的某些方法，优化返回值</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> deeps = <span class="keyword">new</span> <span class="title class_">Map</span>()</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">observe</span> = (<span class="params">key, fn</span>) =&gt; deeps.<span class="title function_">add</span>(key, fn)</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">observable</span> = obj =&gt; <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;get, set&#125;)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">set</span>(<span class="params">target, key, value, receiver</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> result = <span class="title class_">Reflect</span>.<span class="title function_">set</span>(target, key, value, receiver)</span><br><span class="line">  deeps.<span class="title function_">forEach</span>(<span class="function">(<span class="params">deep, deepKey</span>) =&gt;</span> &#123;</span><br><span class="line">    deepKey === key &amp;&amp; <span class="title function_">deep</span>()</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Set-and-WeakSet"><a href="#Set-and-WeakSet" class="headerlink" title="Set and WeakSet"></a>Set and WeakSet</h3><p>ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">set.<span class="title function_">add</span>(<span class="number">4</span>)</span><br><span class="line">set.<span class="title function_">delete</span>(<span class="number">3</span>)</span><br><span class="line">set.<span class="title function_">has</span>(<span class="number">2</span>)</span><br><span class="line">set.<span class="title function_">clear</span>()</span><br><span class="line">set.<span class="title function_">values</span>()</span><br><span class="line">set.<span class="title function_">keys</span>()</span><br><span class="line">set.<span class="title function_">entries</span>()</span><br><span class="line">set.<span class="title function_">forEach</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">/* ============== **/</span></span><br><span class="line"><span class="comment">// WeakSet 的成员只能是对象，而不能是其他类型的值</span></span><br><span class="line"><span class="comment">// WeakSet 中的对象都是弱引用, 不可遍历</span></span><br><span class="line"><span class="comment">// 用来储存数据 判断数据是否存在</span></span><br><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> <span class="title class_">WeakSet</span>()</span><br><span class="line">ws.<span class="title function_">add</span>([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">ws.<span class="title function_">clear</span>([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">ws.<span class="title function_">has</span>([<span class="number">1</span>, <span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<h3 id="Map-and-WeakMap"><a href="#Map-and-WeakMap" class="headerlink" title="Map and WeakMap"></a>Map and WeakMap</h3><p>ES6 提供了 Map 数据结构。它类似于对象，也是键值对的集合，提供了“值—值”的对应，是一种更完善的 Hash 结构实现。如果你需要“键值对”的数据结构</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="title class_">Map</span>()</span><br><span class="line"><span class="keyword">const</span> key = &#123;<span class="attr">p</span>: <span class="string">&#x27;111&#x27;</span>&#125;</span><br><span class="line">map.<span class="title function_">add</span>(key, <span class="string">&#x27;value&#x27;</span>)</span><br><span class="line">map.<span class="title function_">get</span>(key) <span class="comment">// &#x27;value&#x27;</span></span><br><span class="line">map.<span class="title function_">has</span>(key) <span class="comment">// true</span></span><br><span class="line">map.<span class="title function_">delete</span>(key)</span><br><span class="line">map.<span class="title function_">has</span>(key) <span class="comment">// false</span></span><br><span class="line">map.<span class="title function_">clear</span>()</span><br></pre></td></tr></table></figure>
+<h3 id="Vue3响应式原理"><a href="#Vue3响应式原理" class="headerlink" title="Vue3响应式原理"></a>Vue3响应式原理</h3><ul>
+<li><p>通过 effect  声明依赖响应式数据的函数cb ( 例如视图渲染函数render函数)，并执行cb函数，执行过程中，会触发响应式数据 getter</p>
+</li>
+<li><p>在响应式数据 getter中进行 track依赖收集：建立 数据&amp;cb 的映射关系存储于 targetMap</p>
+</li>
+<li><p>当变更响应式数据时，触发 trigger <strong>，</strong>根据 targetMap 找到关联的cb执行</p>
+</li>
+</ul>
+<h4 id="Vue3响应式实现"><a href="#Vue3响应式实现" class="headerlink" title="Vue3响应式实现"></a>Vue3响应式实现</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 建立响应式数据</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">reactive</span>(<span class="params">obj</span>)&#123;&#125;</span><br><span class="line"><span class="comment">// 声明响应函数cb(依赖响应式数据)</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">effect</span>(<span class="params">cb</span>)&#123;&#125;</span><br><span class="line"><span class="comment">// 依赖收集</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">track</span>(<span class="params">target, key</span>)&#123;&#125;</span><br><span class="line"><span class="comment">// 触发更新</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">trigger</span>(<span class="params">target, key</span>)&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">isObject</span> (val) &#123;</span><br><span class="line">  <span class="keyword">return</span> val !== <span class="literal">null</span> &amp;&amp; <span class="keyword">typeof</span> val === <span class="string">&#x27;object&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">reactive</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title function_">isObject</span>(obj))<span class="keyword">return</span> obj</span><br><span class="line">  <span class="keyword">const</span> observed = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123; </span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> result = <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;getter&quot;</span>, result)</span><br><span class="line">      <span class="title function_">track</span>(target, key)</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">reactive</span>(result)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">target, key, value, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> result = <span class="title class_">Reflect</span>.<span class="title function_">set</span>(target, key, value, receiver)</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;setter&#x27;</span>, result)</span><br><span class="line">      <span class="title function_">trigger</span>(target, key)</span><br><span class="line">      <span class="keyword">return</span> result</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> observed</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> effectStack = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">effect</span>(<span class="params">cb</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> _effect = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(_effect)</span><br><span class="line">      effectStack.<span class="title function_">push</span>(_effect)</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">cb</span>()</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;finally&#x27;</span>)</span><br><span class="line">      effectStack.<span class="title function_">pop</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">_effect</span>()</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(effectStack)</span><br><span class="line">  <span class="keyword">return</span> _effect</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> targetMap = <span class="keyword">new</span> <span class="title class_">WeakMap</span>()</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">track</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> effectFn = effectStack[effectStack.<span class="property">length</span> - <span class="number">1</span>]</span><br><span class="line">  <span class="keyword">if</span> (effectFn) &#123;</span><br><span class="line">    <span class="keyword">let</span> depsMap = targetMap.<span class="title function_">get</span>(target)</span><br><span class="line">    <span class="keyword">if</span> (!depsMap) &#123;</span><br><span class="line">      depsMap = <span class="keyword">new</span> <span class="title class_">Map</span>()</span><br><span class="line">      targetMap.<span class="title function_">set</span>(target, depsMap)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> deps = depsMap.<span class="title function_">get</span>(key)</span><br><span class="line">    <span class="keyword">if</span> (!deps) &#123;</span><br><span class="line">      deps = <span class="keyword">new</span> <span class="title class_">Set</span>()</span><br><span class="line">      depsMap.<span class="title function_">set</span>(key, deps)</span><br><span class="line">    &#125;</span><br><span class="line">    deps.<span class="title function_">add</span>(effectFn)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">trigger</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> depsMap = targetMap.<span class="title function_">get</span>(target)</span><br><span class="line">  <span class="keyword">if</span> (depsMap) &#123;</span><br><span class="line">    <span class="keyword">const</span> deps = depsMap.<span class="title function_">get</span>(key)</span><br><span class="line">    <span class="keyword">if</span> (deps) &#123;</span><br><span class="line">      deps.<span class="title function_">forEach</span>(<span class="function"><span class="params">effect</span> =&gt;</span> <span class="title function_">effect</span>())</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/15/vue-preload/" rel="prev" title="vue-preload">
+                  <i class="fa fa-angle-left"></i> vue-preload
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/09/02/%E7%BB%84%E4%BB%B6%E5%BA%93%E6%9E%84%E5%BB%BA/" rel="next" title="组件库构建">
+                  组件库构建 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备17041982号-1 </a>
+  </div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Len Van</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

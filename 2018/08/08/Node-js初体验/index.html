@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fwenyi.cn","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="node 概念Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I&#x2F;O 的模型，使其轻量又高效。  node requestrequest是node的服务器模块,用来处理请求 123456789const request &#x3D; require(&#x27;request&#x27;);var server">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js初体验">
+<meta property="og:url" content="http://fwenyi.cn/2018/08/08/Node-js%E5%88%9D%E4%BD%93%E9%AA%8C/index.html">
+<meta property="og:site_name" content="Fwenyi-Blog">
+<meta property="og:description" content="node 概念Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I&#x2F;O 的模型，使其轻量又高效。  node requestrequest是node的服务器模块,用来处理请求 123456789const request &#x3D; require(&#x27;request&#x27;);var server">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-08-08T07:12:50.000Z">
+<meta property="article:modified_time" content="2024-03-29T09:08:58.450Z">
+<meta property="article:author" content="Len Van">
+<meta property="article:tag" content="node.js">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://fwenyi.cn/2018/08/08/Node-js%E5%88%9D%E4%BD%93%E9%AA%8C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://fwenyi.cn/2018/08/08/Node-js%E5%88%9D%E4%BD%93%E9%AA%8C/","path":"2018/08/08/Node-js初体验/","title":"Node.js初体验"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Node.js初体验 | Fwenyi-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Fwenyi-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">琴瑟在御 莫不静好</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#node-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">node 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node-request"><span class="nav-number">2.</span> <span class="nav-text">node request</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node-path"><span class="nav-number">3.</span> <span class="nav-text">node path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node-fs"><span class="nav-number">4.</span> <span class="nav-text">node fs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get%E8%AF%B7%E6%B1%82"><span class="nav-number">5.</span> <span class="nav-text">get请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post%E8%AF%B7%E6%B1%82"><span class="nav-number">6.</span> <span class="nav-text">post请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#express"><span class="nav-number">7.</span> <span class="nav-text">express</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#END"><span class="nav-number">8.</span> <span class="nav-text">END</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Len Van</p>
+  <div class="site-description" itemprop="description">Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://fwenyi.cn/2018/08/08/Node-js%E5%88%9D%E4%BD%93%E9%AA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Len Van">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fwenyi-Blog">
+      <meta itemprop="description" content="Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Node.js初体验 | Fwenyi-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Node.js初体验
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-08-08 15:12:50" itemprop="dateCreated datePublished" datetime="2018-08-08T15:12:50+08:00">2018-08-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-29 17:08:58" itemprop="dateModified" datetime="2024-03-29T17:08:58+08:00">2024-03-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/node-js/" itemprop="url" rel="index"><span itemprop="name">node.js</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="node-概念"><a href="#node-概念" class="headerlink" title="node 概念"></a>node 概念</h2><p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。<br>Node.js 使用了一个事件驱动、非阻塞式 I&#x2F;O 的模型，使其轻量又高效。 </p>
+<h2 id="node-request"><a href="#node-request" class="headerlink" title="node request"></a>node request</h2><p><code>request</code>是<code>node</code>的服务器模块,用来处理请求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const request = require(&#x27;request&#x27;);</span><br><span class="line">var server = http.createServer(function (req, res) &#123;</span><br><span class="line">    if (req.url === &#x27;/&#x27;) &#123;</span><br><span class="line">        res.write(&#x27;welcome to home&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">    res.end();</span><br><span class="line">&#125;);</span><br><span class="line">server.listen(8888);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="node-path"><a href="#node-path" class="headerlink" title="node path"></a>node path</h2><p>提供用于处理文件路径和目录路径的实用工具。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&#x27;path&#x27;);</span><br><span class="line">var obj = path.parse(&#x27;file&#x27;);</span><br><span class="line">    </span><br><span class="line">&#123;</span><br><span class="line">    root: &#x27;c:\\&#x27;,</span><br><span class="line">    dir: &#x27;c:\\wamp\\www&#x27;, // 文件路径</span><br><span class="line">    base: &#x27;a.html&#x27;, // 文件名</span><br><span class="line">    ext: &#x27;html&#x27;,  // 文件扩展名</span><br><span class="line">    name: &#x27;a&#x27; // 文件名</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="node-fs"><a href="#node-fs" class="headerlink" title="node fs"></a>node fs</h2><p>操作文件系统，每个文件操作都有同步和异步形式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&#x27;fs&#x27;);</span><br><span class="line">fs.unlink(&#x27;filepath&#x27;, (err) =&gt; &#123;</span><br><span class="line">  if (err) throw err;</span><br><span class="line">  cosole.log(&#x27;ok&#x27;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="get请求"><a href="#get请求" class="headerlink" title="get请求"></a>get请求</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const http = require(&#x27;http&#x27;);</span><br><span class="line">const url = require(&#x27;url&#x27;);</span><br><span class="line">http.createServer((req, res) =&gt; &#123;</span><br><span class="line">  var obj = url.parse(req.url, true);</span><br><span class="line">  console.log(obj);</span><br><span class="line">&#125;).listen(8888);</span><br></pre></td></tr></table></figure>
+<h2 id="post请求"><a href="#post请求" class="headerlink" title="post请求"></a>post请求</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const http = require(&#x27;http&#x27;);</span><br><span class="line">const questring = require(&#x27;querystring&#x27;);</span><br><span class="line">http.createServer((req, res) =&gt; &#123;</span><br><span class="line">  // post - req</span><br><span class="line">  var str = &#x27;&#x27;; </span><br><span class="line">  req.on(&#x27;data&#x27;, function (data) &#123;</span><br><span class="line">    str += data;</span><br><span class="line">  &#125;)</span><br><span class="line">  // 数据接收完成</span><br><span class="line">  req.on(&#x27;end&#x27;, function () &#123;</span><br><span class="line">    var obj = questring.parse(str);</span><br><span class="line">    console.log(obj);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;).listen(8888);</span><br></pre></td></tr></table></figure>
+<h2 id="express"><a href="#express" class="headerlink" title="express"></a>express</h2><p>基于 Node.js 平台，快速、开放、极简的 Web 开发框架</p>
+<h2 id="END"><a href="#END" class="headerlink" title="END"></a>END</h2><p>最终以官方文档为主，学习的时候可以对照官方文档，看对应的API教程。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/node-js/" rel="tag"># node.js</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/06/11/wx/" rel="prev" title="微信小程序(二)">
+                  <i class="fa fa-angle-left"></i> 微信小程序(二)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/10/06/express/" rel="next" title="express">
+                  express <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备17041982号-1 </a>
+  </div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Len Van</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
