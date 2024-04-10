@@ -1,0 +1,21 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "my blog",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/LenVan/andrewgoodFan.github.io"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "Len Van",
+  "license": "ISC",
+  "dependencies": {
+    "hexo": "^7.1.1"
+  }
+}
