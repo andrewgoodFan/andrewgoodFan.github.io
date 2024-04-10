@@ -8,12 +8,12 @@ subtitle: 琴瑟在御 莫不静好
 description: Blog
 keywords:
 author: Len Van
-language: en
+language: zh-CN
 timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://fwenyi.cn
+url: http://fwenyi.cn
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -103,5 +103,11 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://gitee.com/LenVan/andrewgoodFan.github.io
+  repo: https://gitee.com/LenVan/andrewgoodFan.github.io.git
   branch: master
+
+excerpt:
+  depth: 5
+  excerpt_excludes: []
+  more_excludes: []
+  hideWholePostExcerpt: true
